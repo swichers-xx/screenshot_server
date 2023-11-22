@@ -15,19 +15,16 @@ def url_to_filename(url, extension):
     return f"{sanitized_url}_{timestamp}{extension}"
 
 def process_webpage(url):
-#    driver = None
+    driver = None
     try:
-#        options = Options()
-        chrome_options = Options()
+        options = Options()
         options.add_argument("--headless")
         options.add_argument("--disable-gpu")
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
         # Using environment variable for Selenium Hub URL
-        selenium_hub_url = os.environ.get('SELENIUM_HUB_URL', 'http://172.16.1.184:4444/wd/hub')
-        driver = webdriver.Remote(
-            command_executor=selenium_hub_url,
-            options=chrome_options)
+        selenium_hub_url = os.environ.get('SELENIUM_HUB_URL', 'http://selenium-hub:4444/wd/hub')
+        driver = webdriver.Remote(command_executor=selenium_hub_url, options=options)
 
         driver.get(url)
         driver.implicitly_wait(10)  # Wait for the page to load
@@ -53,13 +50,11 @@ def process_webpage(url):
         with open(text_filename, 'w', encoding='utf-8') as f:
             f.write(text_content)
 
-
     except Exception as e:
         print(f"Error processing webpage {url}: {e}")
     finally:
         if driver:
             driver.quit()
-
 @app.route('/', methods=['POST'])
 def index():
     data = request.json
