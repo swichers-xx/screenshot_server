@@ -10,8 +10,21 @@ COPY . .
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 8090 available to the world outside this container
-EXPOSE 8090
+# Install Chrome and Chromedriver for Selenium
+RUN apt-get update && apt-get install -y wget gnupg2 \
+    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install \
+    && rm google-chrome-stable_current_amd64.deb \
+    && wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip \
+    && unzip chromedriver_linux64.zip && rm chromedriver_linux64.zip \
+    && mv chromedriver /usr/bin/chromedriver && chown root:root /usr/bin/chromedriver \
+    && chmod +x /usr/bin/chromedriver
+
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Define environment variable
+ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "./app.py"]
+CMD ["python", "./screenshot_server2.py"]
