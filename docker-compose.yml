@@ -6,13 +6,14 @@ services:
     ports:
       - "4444:4444"
 
-  chrome-node:
+  selenium-node-chrome:
     image: selenium/node-chrome:latest
     depends_on:
       - selenium-hub
     environment:
-      - HUB_HOST=selenium-hub
-      - HUB_PORT=4444
+      SE_EVENT_BUS_HOST: 127.0.0.1
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
 
   web-app:
     build: .
