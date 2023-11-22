@@ -17,14 +17,17 @@ def url_to_filename(url, extension):
 def process_webpage(url):
     driver = None
     try:
-        options = Options()
+#        options = Options()
+        chrome_options = Options()
         options.add_argument("--headless")
         options.add_argument("--disable-gpu")
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
         # Using environment variable for Selenium Hub URL
         selenium_hub_url = os.environ.get('SELENIUM_HUB_URL', 'http://172.16.1.184:4444/wd/hub')
-        driver = webdriver.Remote(command_executor=selenium_hub_url, options=options)
+        driver = webdriver.Remote(
+            command_executor=selenium_hub_url,
+            options=chrome_options)
 
         driver.get(url)
         driver.implicitly_wait(10)  # Wait for the page to load
