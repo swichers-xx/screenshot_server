@@ -15,7 +15,7 @@ def url_to_filename(url, extension):
     return f"{sanitized_url}_{timestamp}{extension}"
 
 def process_webpage(url):
-    driver = None
+#    driver = None
     try:
 #        options = Options()
         chrome_options = Options()
