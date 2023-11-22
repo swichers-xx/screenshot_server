@@ -10,8 +10,8 @@ COPY . .
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Chrome and Chromedriver for Selenium
-RUN apt-get update && apt-get install -y wget gnupg2 \
+# Install Chrome, Chromedriver and Unzip for Selenium
+RUN apt-get update && apt-get install -y wget gnupg2 unzip \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install \
     && rm google-chrome-stable_current_amd64.deb \
@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y wget gnupg2 \
     && unzip chromedriver_linux64.zip && rm chromedriver_linux64.zip \
     && mv chromedriver /usr/bin/chromedriver && chown root:root /usr/bin/chromedriver \
     && chmod +x /usr/bin/chromedriver
+
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
