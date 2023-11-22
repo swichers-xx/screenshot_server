@@ -13,8 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Make port 8090 available to the world outside this container
 EXPOSE 8090
 
-# Define environment variable for the ChromeDriver
-ENV CHROMEDRIVER_PATH /usr/bin/chromedriver
-
 # Run app.py when the container launches
 CMD ["python", "./app.py"]
