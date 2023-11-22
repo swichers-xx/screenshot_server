@@ -23,8 +23,10 @@ def process_webpage(url):
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
         # Using environment variable for Selenium Hub URL
-        selenium_hub_url = os.environ.get('SELENIUM_HUB_URL', 'http://selenium-hub:4444/wd/hub')
-        driver = webdriver.Remote(command_executor=selenium_hub_url, options=options)
+        driver = webdriver.Remote(
+            command_executor='http://172.16.1.184:4444/wd/hub',
+            options=options
+        )
 
         driver.get(url)
         driver.implicitly_wait(10)  # Wait for the page to load
