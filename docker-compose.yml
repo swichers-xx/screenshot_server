@@ -17,7 +17,11 @@ services:
 
   web-app:
     build: .
-    depends_on:
-      - selenium-hub
     ports:
       - "8090:8090"
+    volumes:
+      - ./screenshots:/usr/src/app/screenshots
+
+volumes:
+  screenshots:
+    driver: local
