@@ -11,7 +11,7 @@ import base64
 app = Flask(__name__)
 
 # Update the ChromeDriver path according to your setup
-CHROMEDRIVER_PATH = 'C:\Tools\cap2\server\chromedriver.exe'
+CHROMEDRIVER_PATH = '/usr/bin/chromedriver'
 
 def url_to_filename(url, extension):
     sanitized_url = "".join([c if c.isalnum() else "_" for c in url])
@@ -25,7 +25,7 @@ def process_webpage(url):
         options.add_argument("--disable-gpu")
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-        service = Service("C:\Tools\cap2\server\chromedriver.exe")
+        service = Service("/usr/bin/chromedriver")
         driver = webdriver.Chrome(service=service, options=options)
 
         driver.get(url)
