@@ -27,4 +27,4 @@ EXPOSE 5000
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "./screenshot_server2.py"]
+CMD ["python", "./screenshot_server.py"]
