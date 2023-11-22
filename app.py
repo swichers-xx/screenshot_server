@@ -24,7 +24,7 @@ def process_webpage(url):
 
         # Using environment variable for Selenium Hub URL
         driver = webdriver.Remote(
-            command_executor='http://selenium-chrome:4444/wd/hub',
+            command_executor='http://172.16.1.184:4444/wd/hub',
         options=options
         )
 
