@@ -1,20 +1,6 @@
 version: '3'
+
 services:
-  selenium-hub:
-    image: selenium/hub:latest
-    container_name: selenium-hub
-    ports:
-      - "4444:4444"
-
-  selenium-node-chrome:
-    image: selenium/node-chrome:latest
-    depends_on:
-      - selenium-hub
-    environment:
-      SE_EVENT_BUS_HOST: 127.0.0.1
-      SE_EVENT_BUS_PUBLISH_PORT: 4442
-      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
-
   web-app:
     build: .
     ports:
@@ -22,6 +8,9 @@ services:
     volumes:
       - ./screenshots:/usr/src/app/screenshots
 
-volumes:
-  screenshots:
-    driver: local
+  selenium-chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "4444:4444"
+    volumes:
+      - /dev/shm:/dev/shm  # recommended for performance
