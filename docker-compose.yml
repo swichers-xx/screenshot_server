@@ -7,10 +7,3 @@ services:
       - "8090:8090"
     volumes:
       - ./screenshots:/usr/src/app/screenshots
-
-  selenium-chrome:
-    image: selenium/standalone-chrome:latest
-    ports:
-      - "4444:4444"
-    volumes:
-      - /dev/shm:/dev/shm  # recommended for performance
